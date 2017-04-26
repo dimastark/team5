@@ -37,6 +37,8 @@ describe('controller:users', () => {
             await chaiRequest.get(`/api/users/some-bad-username`);
         } catch (err) {
             err.status.should.equal(HttpStatus.NOT_FOUND);
+            return;
         }
+        throw new Error();
     });
 });

@@ -40,7 +40,9 @@ describe('models:Quest', () => {
             await createQuestWithAuthor(questData);
         } catch (err) {
             err.name.should.equal(ValidationError.name);
+            return;
         }
+        throw new Error();
     });
 
     it('error on save without required author', async () => {
@@ -51,7 +53,9 @@ describe('models:Quest', () => {
             await Quest.create(questData);
         } catch (err) {
             err.name.should.equal(ValidationError.name);
+            return;
         }
+        throw new Error();
     });
 
     it('should update by slug', async () => {

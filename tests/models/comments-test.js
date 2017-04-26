@@ -41,7 +41,9 @@ describe('models:Comments', () => {
             await Comment.create(user, message);
         } catch (err) {
             err.name.should.equal(ValidationError.name);
+            return;
         }
+        throw new Error();
     });
 
     it('should remove by id', async () => {

@@ -80,7 +80,9 @@ describe('controller:quest', () => {
                     await createQuest();
                 } catch (err) {
                     err.response.status.should.equal(HttpStatus.BAD_REQUEST);
+                    return;
                 }
+                throw new Error();
             });
 
             it('should not put a quest without auth', async () => {
@@ -97,7 +99,9 @@ describe('controller:quest', () => {
                     await chaiRequest.put(`/api/quests/${slug}`, updateData);
                 } catch (err) {
                     err.response.status.should.equal(HttpStatus.BAD_REQUEST);
+                    return;
                 }
+                throw new Error();
             });
 
             it('should not delete a quest without auth', async () => {
@@ -109,7 +113,9 @@ describe('controller:quest', () => {
                     await chaiRequest.delete(`/api/quests/${slug}`);
                 } catch (err) {
                     err.response.status.should.equal(HttpStatus.BAD_REQUEST);
+                    return;
                 }
+                throw new Error();
             });
         });
     });
@@ -141,7 +147,9 @@ describe('controller:quest', () => {
             } catch (err) {
                 err.status.should.equal(HttpStatus.NOT_FOUND);
                 err.response.text.should.equal(constants.quest.questNotFoundErrorMessage);
+                return;
             }
+            throw new Error();
         });
     });
 });

@@ -30,7 +30,9 @@ describe('controller:auth', () => {
 
                 err.status.should.be.equal(httpStatus.BAD_REQUEST);
                 err.response.text.should.be.equal(constants.models.user.alreadyExistsPattern(username));
+                return;
             }
+            throw new Error();
         });
     });
 
@@ -50,7 +52,9 @@ describe('controller:auth', () => {
             } catch (err) {
                 err.status.should.equal(httpStatus.BAD_REQUEST);
                 err.response.text.should.equal(constants.models.user.wrongPasswordOrNameMessage);
+                return;
             }
+            throw new Error();
         });
 
         it('should fails sign in if already signed in', async () => {
@@ -61,7 +65,9 @@ describe('controller:auth', () => {
             } catch (err) {
                 err.status.should.equal(httpStatus.BAD_REQUEST);
                 err.response.text.should.equal(constants.controllers.auth.alreadyAuthenticated);
+                return;
             }
+            throw new Error();
         });
 
         it('should fails sign in to non-existent account', async () => {
@@ -70,7 +76,9 @@ describe('controller:auth', () => {
             } catch (err) {
                 err.status.should.equal(httpStatus.BAD_REQUEST);
                 err.response.text.should.equal(constants.models.user.wrongPasswordOrNameMessage);
+                return;
             }
+            throw new Error();
         });
     });
 
@@ -90,7 +98,9 @@ describe('controller:auth', () => {
             } catch (err) {
                 err.response.status.should.equal(httpStatus.BAD_REQUEST);
                 err.response.text.should.equal(constants.controllers.auth.authorizationRequired);
+                return;
             }
+            throw new Error();
         });
     });
 });

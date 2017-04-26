@@ -26,7 +26,9 @@ describe('models:user', () => {
             await User.create(userData);
         } catch (err) {
             err.code.should.be.equal(constants.mongoose.mongoDuplicateErrorCode);
+            return;
         }
+        throw new Error();
     });
 
     it('should not create account without password', async () => {
@@ -34,7 +36,9 @@ describe('models:user', () => {
             await User.create({username: usersMocks.userWithCorrectPassword.username});
         } catch (err) {
             err.message.should.be.equal(constants.models.user.passwordRequiredMessage);
+            return;
         }
+        throw new Error();
     });
 
     it('should not create account without username', async () => {
@@ -42,7 +46,9 @@ describe('models:user', () => {
             await User.create({password: usersMocks.userWithCorrectPassword.password});
         } catch (err) {
             err.name.should.be.equal(constants.mongoose.validationErrorName);
+            return;
         }
+        throw new Error();
     });
 
     it('gets true by verification a correct password', async () => {
@@ -59,7 +65,9 @@ describe('models:user', () => {
             await User.verifyPassword(usersMocks.userWithIncorrectPassword);
         } catch (err) {
             err.message.should.be.equal(constants.models.user.wrongPasswordOrNameMessage);
+            return;
         }
+        throw new Error();
     });
 
     it('changes password', async () => {
@@ -78,7 +86,9 @@ describe('models:user', () => {
             await User.changePassword(usersMocks.userWithIncorrectPassword, usersMocks.userWithCorrectPassword.password);
         } catch (err) {
             err.message.should.be.equal(constants.models.user.wrongPasswordOrNameMessage);
+            return;
         }
+        throw new Error();
     });
 
     it('check that password was hashed', async () => {
